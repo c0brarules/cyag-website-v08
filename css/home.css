@@ -1,0 +1,257 @@
+/* ============================================================
+   HOME PAGE – home.css
+   ============================================================ */
+
+/* Hero */
+.home-hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-hero .hero-inner { padding-top: 2rem; }
+
+/* ============================================================
+   ROCKET LAUNCH SCENE
+   ============================================================ */
+.rocket-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem 1.5rem 3.5rem;
+}
+
+.rocket-scene {
+  position: relative;
+  width: 12rem;
+  height: 22rem;
+  overflow: visible;
+}
+
+/* Launch pad */
+.launch-pad {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7rem;
+  height: 0.6rem;
+  background: linear-gradient(90deg, #1a3a6b, #4a9edd, #1a3a6b);
+  border-radius: 3px;
+  box-shadow: 0 0 18px rgba(74,158,221,0.5);
+}
+
+.launch-pad::before,
+.launch-pad::after {
+  content: '';
+  position: absolute;
+  bottom: 0.5rem;
+  width: 0.3rem;
+  height: 2.5rem;
+  background: rgba(74,158,221,0.5);
+  border-radius: 2px;
+}
+.launch-pad::before { left: 1.5rem; }
+.launch-pad::after  { right: 1.5rem; }
+
+/* Rocket wrapper — animates upward */
+.rocket {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: none;
+}
+
+/* Launch animation */
+.rocket.launched {
+  animation: rocketLaunch 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes rocketLaunch {
+  0%   { transform: translateX(-50%) translateY(0) rotate(0deg);    opacity: 1; }
+  5%   { transform: translateX(-50%) translateY(-0.3rem) rotate(0deg); }
+  8%   { transform: translateX(-50%) translateY(-0.1rem) rotate(0deg); }
+  15%  { transform: translateX(-50%) translateY(-2rem) rotate(-1deg);  }
+  30%  { transform: translateX(-50%) translateY(-8rem) rotate(1deg);   }
+  55%  { transform: translateX(-50%) translateY(-18rem) rotate(-0.5deg); opacity: 1; }
+  80%  { transform: translateX(-50%) translateY(-32rem) rotate(0deg);  opacity: 0.6; }
+  100% { transform: translateX(-50%) translateY(-50rem) rotate(0deg);  opacity: 0; }
+}
+
+/* --- Rocket SVG-like CSS drawing --- */
+.rocket-body {
+  position: relative;
+  width: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Nose cone */
+.rocket-nose {
+  width: 0;
+  height: 0;
+  border-left:  1.75rem solid transparent;
+  border-right: 1.75rem solid transparent;
+  border-bottom: 3.5rem solid var(--clr-accent);
+  filter: drop-shadow(0 0 8px rgba(232,0,61,0.6));
+}
+
+/* Main tube */
+.rocket-body::before {
+  content: '';
+  width: 3.5rem;
+  height: 5rem;
+  background: linear-gradient(180deg, var(--clr-accent) 0%, #c0002e 100%);
+  display: block;
+}
+
+/* Window */
+.rocket-window {
+  position: absolute;
+  top: 4.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #a0d8f8, #1a3a6b);
+  border: 0.2rem solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 8px rgba(74,158,221,0.8), inset 0 0 4px rgba(74,158,221,0.5);
+  z-index: 2;
+}
+
+/* Fins */
+.rocket-fin {
+  position: absolute;
+  bottom: 2rem;
+  width: 0;
+  height: 0;
+  border-top: 2.5rem solid transparent;
+  border-bottom: 0.5rem solid rgba(200,0,40,0.9);
+}
+
+.rocket-fin.left {
+  right: calc(100% - 0.2rem);
+  border-right: 1.5rem solid rgba(200,0,40,0.9);
+}
+.rocket-fin.right {
+  left: calc(100% - 0.2rem);
+  border-left: 1.5rem solid rgba(200,0,40,0.9);
+}
+
+/* Engine bell */
+.rocket-engine {
+  width: 2.4rem;
+  height: 1rem;
+  background: linear-gradient(180deg, #555, #222);
+  border-radius: 0 0 0.5rem 0.5rem;
+  margin-top: -0.1rem;
+}
+
+/* Exhaust flames */
+.exhaust {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-top: -0.2rem;
+}
+
+.flame {
+  border-radius: 50% 50% 60% 60% / 60% 60% 100% 100%;
+  animation: flicker 0.12s ease-in-out infinite alternate;
+}
+
+.f1 { width: 1rem; height: 3rem; background: linear-gradient(180deg, #fff 0%, #f5c842 25%, #f50 60%, transparent 100%); animation-delay: 0s; }
+.f2 { width: 0.7rem; height: 4rem; background: linear-gradient(180deg, #fff 0%, #f5c842 20%, #f90 50%, #f50 80%, transparent 100%); animation-delay: -0.05s; margin-top: -0.5rem; z-index: 2; }
+.f3 { width: 1rem; height: 2.5rem; background: linear-gradient(180deg, #fff 0%, #f5c842 30%, #f50 70%, transparent 100%); animation-delay: -0.02s; }
+
+@keyframes flicker {
+  from { transform: scaleX(1)   scaleY(1); }
+  to   { transform: scaleX(0.9) scaleY(1.08); }
+}
+
+/* Smoke puffs */
+.smoke {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(180,200,220,0.25);
+  filter: blur(6px);
+  animation: smokeRise 1.5s ease-out infinite;
+  pointer-events: none;
+}
+.s1 { width: 3rem; height: 3rem; bottom: -1rem; left: 0;    animation-delay: 0s; }
+.s2 { width: 4rem; height: 4rem; bottom: -2rem; left: -0.5rem; animation-delay: 0.4s; opacity: 0.6; }
+.s3 { width: 2.5rem; height: 2.5rem; bottom: -0.5rem; right: -0.5rem; animation-delay: 0.8s; }
+
+@keyframes smokeRise {
+  0%   { transform: translateY(0) scale(0.8); opacity: 0.5; }
+  100% { transform: translateY(-3rem) scale(2); opacity: 0; }
+}
+
+/* Rocket section text */
+.rocket-caption {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  color: var(--clr-muted);
+}
+
+.relaunch-btn {
+  font-size: 0.72rem;
+  padding: 0.6rem 1.4rem;
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(245,200,66,0.4);
+}
+
+.stat-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+}
+
+/* ============================================================
+   CTA CARD
+   ============================================================ */
+.cta-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(13,31,60,0.8), rgba(26,58,107,0.4));
+  border: 1px solid rgba(74,158,221,0.2);
+  border-radius: 1.25rem;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.cta-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(74,158,221,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
